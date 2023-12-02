@@ -10,7 +10,6 @@ import 'model/app_data.dart';
 import 'ui/destination.dart';
 import 'ui/destination_view.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 
 GetIt getIt = GetIt.asNewInstance();
 
@@ -60,31 +59,24 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => brightness == Brightness.light
-            ? Themes.lightTheme
-            : Themes.darkTheme,
-        themedWidgetBuilder: (context, theme) {
-          return MaterialApp(
-            title: 'bitacora',
-            theme: theme,
-            darkTheme: Themes.darkTheme,
-            home: Routing(),
-            localizationsDelegates: [
-              // ... app-specific localization delegate[s] here
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en'), // English
-              const Locale('es'), // Spanish
-              const Locale('fr'), // French
-              const Locale('zh'), // Chinese
-            ],
-          );
-        });
+    return MaterialApp(
+      title: 'bitacora',
+      theme: Themes.lightTheme,
+      darkTheme: Themes.darkTheme,
+      home: Routing(),
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'), // English
+        const Locale('es'), // Spanish
+        const Locale('fr'), // French
+        const Locale('zh'), // Chinese
+      ],
+    );
   }
 }
 
@@ -132,7 +124,7 @@ class RoutingState extends State<Routing> with SingleTickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         items: allDestinations.map((Destination destination) {
           return BottomNavigationBarItem(
-              icon: Icon(destination.icon), title: Text(destination.title));
+              icon: Icon(destination.icon), label: destination.title);
         }).toList(),
         currentIndex: _selectedIndex,
         selectedItemColor: theme.colorScheme.secondary,

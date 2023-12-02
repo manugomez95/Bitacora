@@ -1,6 +1,5 @@
 import 'package:bitacora/model/property.dart';
 import 'package:bitacora/ui/components/property_view.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -46,7 +45,7 @@ InputDecoration textInputDecoration(ValueLV value) {
       hintText: value.last != null ? value.last.toString() : "");
 }
 
-DateTimeField dateTimeField(
+InputDecoration dateTimeField(
     {bool showDate,
     bool showTime,
     BuildContext context,
@@ -56,37 +55,7 @@ DateTimeField dateTimeField(
   DateFormat format = DateFormat(
       "${showDate ? "yyyy-MM-dd" : ""}${showTime && showDate ? " " : ""}${showTime ? "HH:mm" : ""}");
 
-  return DateTimeField(
-    initialValue: value.current,
-    onChanged: onChanged,
-    format: format,
-    focusNode: value.focus,
-    decoration: InputDecoration(
-        hintText: value.last != null
-            ? format.format(value.last)
-            : format.format(DateTime.now())),
-    onShowPicker: (context, currentValue) async {
-      DateTime date;
-      TimeOfDay time;
-      if (showDate) {
-        date = await showDatePicker(
-            context: context,
-            firstDate: DateTime(1900),
-            initialDate: currentValue ?? DateTime.now(),
-            lastDate: DateTime(2100));
-      }
-      date = date ?? DateTime.now();
-
-      if (showTime) {
-        time = await showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-        );
-        time = time ?? TimeOfDay.fromDateTime(currentValue ?? DateTime.now());
-        return DateTimeField.combine(date, time);
-      } else {
-        return date;
-      }
-    },
-  );
+  return InputDecoration(
+      hintMaxLines: 1,
+      hintText: value.last != null ? value.toString() : "");
 }

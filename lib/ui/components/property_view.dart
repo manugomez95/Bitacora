@@ -279,13 +279,6 @@ class _PropertyViewState extends State<PropertyView>
             value.current = property.type.primitive.defaultV;
           else if (widget.action.type == app.ActionType.EditLastFrom)
             value.current = value.last;
-
-        ret = dateTimeField(
-            showDate: true,
-            showTime: true,
-            context: context,
-            value: value,
-            onChanged: (newValue) => _onChangeController(value, newValue));
         break;
 
       /// Time
@@ -295,13 +288,6 @@ class _PropertyViewState extends State<PropertyView>
             value.current = property.type.primitive.defaultV;
           else if (widget.action.type == app.ActionType.EditLastFrom)
             value.current = value.last;
-
-        ret = dateTimeField(
-            showDate: false,
-            showTime: true,
-            context: context,
-            value: value,
-            onChanged: (newValue) => _onChangeController(value, newValue));
         break;
 
       /// Date
@@ -311,13 +297,6 @@ class _PropertyViewState extends State<PropertyView>
             value.current = property.type.primitive.defaultV;
           else if (widget.action.type == app.ActionType.EditLastFrom)
             value.current = value.last;
-
-        ret = dateTimeField(
-            showDate: true,
-            showTime: false,
-            context: context,
-            value: value,
-            onChanged: (newValue) => _onChangeController(value, newValue));
         break;
       default:
         throw Exception("${property.type.primitive} not supported");

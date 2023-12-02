@@ -1,5 +1,4 @@
 import 'package:bitacora/main.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,12 +40,7 @@ class _DestinationViewState extends State<DestinationView> {
               onSelected: (value) {
                 switch (value) {
                   case 1:
-                    setState(() {
-                      DynamicTheme.of(context).setBrightness(
-                          Theme.of(context).brightness == Brightness.dark
-                              ? Brightness.light
-                              : Brightness.dark);
-                    });
+                    // TODO: Change theme
                     break;
                   case 2:
                     showAboutDialog(
